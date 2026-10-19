@@ -1,6 +1,9 @@
 
 import { useState } from "react";
+import { Routes, Route, NavLink } from "react-router-dom";
 import "./App.css";
+import ExperiencePage from "./pages/ExperiencePage.jsx";
+import SchedulePage from "./pages/SchedulePage.jsx";
 
 const artists = [
   {
@@ -29,7 +32,7 @@ const artists = [
   },
 ];
 
-function App() {
+function HomePage() {
   const [selectedArtist, setSelectedArtist] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -47,12 +50,16 @@ function App() {
     );
   }
 
+  function closeMenu() {
+    setMenuOpen(false);
+  }
+
   return (
     <main>
       <nav className="navbar">
-        <a href="#home" className="logo">
+        <NavLink to="/" className="logo" onClick={closeMenu}>
           AFTER12<span>®</span>
-        </a>
+        </NavLink>
 
         <button
           className="menu-toggle"
@@ -64,13 +71,15 @@ function App() {
         </button>
 
         <div className={`nav-links ${menuOpen ? "nav-open" : ""}`}>
-          <a href="#experience" onClick={() => setMenuOpen(false)}>
+          <NavLink to="/experience" onClick={closeMenu}>
             EXPERIENCE
-          </a>
-          <a href="#lineup" onClick={() => setMenuOpen(false)}>
+          </NavLink>
+
+          <a href="#lineup" onClick={closeMenu}>
             LINEUP
           </a>
-          <a href="#details" onClick={() => setMenuOpen(false)}>
+
+          <a href="#details" onClick={closeMenu}>
             DETAILS
           </a>
         </div>
@@ -80,11 +89,7 @@ function App() {
         </a>
       </nav>
 
-      <section
-        className="hero"
-        id="home"
-        onMouseMove={moveGlow}
-      >
+      <section className="hero" id="home" onMouseMove={moveGlow}>
         <div className="hero-image" />
         <div className="hero-glow" />
         <div className="sun-orb" />
@@ -114,10 +119,10 @@ function App() {
               STAY FOR THE FEELING.
             </p>
 
-            <a className="explore-button" href="#experience">
+            <NavLink className="explore-button" to="/experience">
               <span>ENTER THE AFTER12</span>
               <span className="button-arrow">↘</span>
-            </a>
+            </NavLink>
           </div>
         </div>
 
@@ -127,12 +132,14 @@ function App() {
           <span>4° 54' E</span>
         </div>
 
-        <a href="#experience" className="scroll-cue">
-          SCROLL TO FEEL SOMETHING
+        <NavLink to="/experience" className="scroll-cue">
+          DISCOVER THE EXPERIENCE
           <span>↓</span>
-        </a>
+        </NavLink>
 
-        <span className="hero-side-note">SOUNDTRACK TO THE SUNSET ®</span>
+        <span className="hero-side-note">
+          SOUNDTRACK TO THE SUNSET ®
+        </span>
       </section>
 
       <div className="ticker" aria-label="Music, art, and after hours">
@@ -175,14 +182,22 @@ function App() {
 
           <div className="experience-copy">
             <span className="big-number">03</span>
-            <h3>DAYS THAT<br />DON'T FEEL<br />LIKE REAL LIFE.</h3>
+            <h3>
+              DAYS THAT
+              <br />
+              DON'T FEEL
+              <br />
+              LIKE REAL LIFE.
+            </h3>
             <p>
               A little less scrolling. A little more feeling.
               Three days of unexpected sounds, open skies,
               strange new friends, and the kind of music
               that follows you home.
             </p>
-            <span className="handwritten">See you at golden hour.</span>
+            <span className="handwritten">
+              See you at golden hour.
+            </span>
           </div>
         </div>
       </section>
@@ -194,7 +209,11 @@ function App() {
         </div>
 
         <div className="lineup-heading">
-          <h2>MEET YOUR<br /><span>NEW FAVOURITES.</span></h2>
+          <h2>
+            MEET YOUR
+            <br />
+            <span>NEW FAVOURITES.</span>
+          </h2>
           <p>
             A few names to get you started.
             <br />
@@ -223,6 +242,7 @@ function App() {
                   {selectedArtist?.number === artist.number ? "−" : "+"}
                 </span>
               </div>
+
               <div className="artist-info">
                 <span>{artist.genre}</span>
                 <h3>{artist.name}</h3>
@@ -249,6 +269,7 @@ function App() {
       <section className="final-cta" id="details">
         <div className="cta-orb" />
         <span className="eyebrow">18 — 20 JUNE 2027 · AMSTERDAM</span>
+
         <h2>
           THE SUN
           <br />
@@ -256,19 +277,23 @@ function App() {
           <br />
           <span>WE WON'T.</span>
         </h2>
+
         <a
           className="cta-button"
           href="mailto:hello@example.com?subject=AFTER12%20festival%20updates"
         >
           KEEP ME IN THE LOOP <span>↗</span>
         </a>
+
         <p className="concept-note">
           A FICTIONAL FESTIVAL CONCEPT CREATED FOR A FRONTEND PORTFOLIO.
         </p>
       </section>
 
       <footer className="footer">
-        <a href="#home" className="logo">AFTER12<span>®</span></a>
+        <NavLink to="/" className="logo">
+          AFTER12<span>®</span>
+        </NavLink>
         <p>MADE FOR THE MOMENTS BETWEEN.</p>
         <a href="#home">BACK TO THE LIGHT ↑</a>
       </footer>
@@ -276,4 +301,12 @@ function App() {
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/experience" element={<ExperiencePage />} />
+      <Route path="/schedule" element={<SchedulePage />} />
+    </Routes>
+  );
+}
