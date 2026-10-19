@@ -1,9 +1,6 @@
-
 import { Link } from "react-router-dom";
+import Navbar from "../parts/navbar.jsx";
 import "./ExperiencePage.css";
-
-
-
 const experiences = [
   {
     number: "01",
@@ -64,6 +61,8 @@ const essentials = [
 export default function ExperiencePage() {
   return (
     <main className="experience-page">
+      <Navbar />
+
       <section className="experience-hero">
         <div className="experience-hero-glow" />
 
@@ -211,9 +210,7 @@ export default function ExperiencePage() {
       <section className="experience-final-cta">
         <div className="experience-cta-orb" />
 
-        <p className="eyebrow">
-          18 — 20 JUNE 2027 · AMSTERDAM
-        </p>
+        <p className="eyebrow">18 — 20 JUNE 2027 · AMSTERDAM</p>
 
         <h2>
           MEET US
@@ -227,8 +224,8 @@ export default function ExperiencePage() {
           Your next favourite weekend starts here.
         </p>
 
-        <Link to="/tickets" className="pill-button">
-          FIND YOUR TICKET <span>↗</span>
+        <Link to="/schedule" className="pill-button">
+          EXPLORE THE SCHEDULE <span>↗</span>
         </Link>
 
         <p className="experience-concept-note">

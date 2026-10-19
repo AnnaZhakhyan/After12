@@ -1,9 +1,10 @@
-
 import { useState } from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
 import "./App.css";
+import Navbar from "./parts/navbar.jsx";
 import ExperiencePage from "./pages/ExperiencePage.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx";
+import TicketsPage from "./pages/TicketsPage.jsx";
 
 const artists = [
   {
@@ -34,7 +35,6 @@ const artists = [
 
 function HomePage() {
   const [selectedArtist, setSelectedArtist] = useState(null);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   function moveGlow(event) {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -50,44 +50,9 @@ function HomePage() {
     );
   }
 
-  function closeMenu() {
-    setMenuOpen(false);
-  }
-
   return (
     <main>
-      <nav className="navbar">
-        <NavLink to="/" className="logo" onClick={closeMenu}>
-          AFTER12<span>®</span>
-        </NavLink>
-
-        <button
-          className="menu-toggle"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? "Close navigation" : "Open navigation"}
-          aria-expanded={menuOpen}
-        >
-          {menuOpen ? "CLOSE −" : "MENU +"}
-        </button>
-
-        <div className={`nav-links ${menuOpen ? "nav-open" : ""}`}>
-          <NavLink to="/experience" onClick={closeMenu}>
-            EXPERIENCE
-          </NavLink>
-
-          <a href="#lineup" onClick={closeMenu}>
-            LINEUP
-          </a>
-
-          <a href="#details" onClick={closeMenu}>
-            DETAILS
-          </a>
-        </div>
-
-        <a className="nav-ticket" href="#details">
-          GET ON THE LIST <span>↗</span>
-        </a>
-      </nav>
+      <Navbar />
 
       <section className="hero" id="home" onMouseMove={moveGlow}>
         <div className="hero-image" />
@@ -108,7 +73,7 @@ function HomePage() {
           <h1 className="hero-title">
             <span className="title-line title-line-one">AFTER</span>
             <span className="title-line title-line-two">
-              GL<span className="title-star">✳</span>W
+              <span className="title-star">✳ </span> 12
             </span>
           </h1>
 
@@ -286,7 +251,7 @@ function HomePage() {
         </a>
 
         <p className="concept-note">
-          A FICTIONAL FESTIVAL CONCEPT CREATED FOR A FRONTEND PORTFOLIO.
+          A FICTIONAL FESTIVAL CREATED FOR A SOFTWARE PORTFOLIO :D
         </p>
       </section>
 
@@ -307,6 +272,7 @@ export default function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/experience" element={<ExperiencePage />} />
       <Route path="/schedule" element={<SchedulePage />} />
+      <Route path="/tickets" element={<TicketsPage/>} />
     </Routes>
   );
 }

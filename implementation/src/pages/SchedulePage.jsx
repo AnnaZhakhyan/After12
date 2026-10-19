@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./SchedulePage.css";
+import Navbar from "../parts/navbar.jsx";
+
 
 const days = [
   { id: "friday", label: "FRI", date: "18 JUN", subtitle: "THE ARRIVAL" },
@@ -159,6 +161,7 @@ export default function SchedulePage() {
 
   return (
     <main className="schedule-page">
+      <Navbar />
       <section className="schedule-hero">
         <div className="schedule-hero-glow" />
 
